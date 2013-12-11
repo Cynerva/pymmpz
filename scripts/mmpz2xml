@@ -1,0 +1,17 @@
+#!/usr/bin/env python
+
+import argparse
+
+from pymmpz import get_xml
+
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("filename", help="MMPZ file to open")
+    args = parser.parse_args()
+
+    print get_xml(args.filename)
+
+
+if __name__ == "__main__":
+    main()

@@ -1,6 +1,6 @@
 import zlib
 from xml.etree import ElementTree
-from midiutil.MidiFile import MIDIFile
+from pyknon.MidiFile import MIDIFile
 
 
 def get_xml(filename):

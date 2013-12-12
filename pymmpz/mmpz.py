@@ -16,10 +16,10 @@ def get_root(filename):
 def get_starting_tempo(root):
     head = root.find("head")
     try:
-        return int(head.get("bpm"))
+        return float(head.get("bpm"))
     except TypeError:
         # Some versions of mmpz have BPM as an element, not an attrib.
-        return int(head.find("bpm").get("value"))
+        return float(head.find("bpm").get("value"))
 
 
 def get_instrument_count(element):
@@ -55,7 +55,7 @@ def add_tempo_events_from_track(midifile, track):
                 midifile.addTempo(
                     track=0,
                     time=(time + int(event.get("pos"))) / 48.0,
-                    tempo=int(event.get("value"))
+                    tempo=float(event.get("value"))
                 )
 
 

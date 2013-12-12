@@ -29,18 +29,26 @@ def add_notes_from_pattern(midifile, pattern, track=0, time=0):
             volume=int(note.get("vol"))
         )
 
+def get_starting_tempo(root):
+    head = root.find("head")
+    try:
+        return int(head.get("bpm"))
+    except TypeError:
+        return int(head.find("bpm").get("value"))
+
 def convert_mmpz_to_midi(infile, outfile):
     root = get_root(infile)
     midifile = MIDIFile(get_instrument_count(root))
+    midifile.addTempo(0, 0, get_starting_tempo(root))
 
     track_id = 0
     for track in root.find("song").find("trackcontainer"):
         if track.get("type") == "0":
             # Main instrument
             for pattern in track.iterfind("pattern"):
-                add_notes_from_pattern(midifile, pattern, track=track_id)
+                add_notes_from_pattern(midifile, pattern, track_id)
             track_id += 1
-        else:
+        elif track.get("type") == "1":
             # Beat/Bassline
             pass # TODO
 

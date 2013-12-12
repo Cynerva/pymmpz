@@ -6,8 +6,8 @@ from pymmpz import get_xml
 
 
 def main():
-    parser = argparse.ArgumentParser()
-    parser.add_argument("filename", help="MMPZ file to open")
+    parser = argparse.ArgumentParser(description="Convert MMPZ to XML")
+    parser.add_argument("filename", help="Name of MMPZ file to read")
     args = parser.parse_args()
 
     print get_xml(args.filename)

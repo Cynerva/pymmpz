@@ -18,12 +18,17 @@ def get_instrument_count(element):
     return count
 
 def add_notes_from_pattern(midifile, pattern, track=0, time=0):
+    # 16 channels to choose from, but channel 9 is percussion, so skip it
+    channel = track % 15
+    if channel >= 9:
+        channel += 1
+
     time += int(pattern.get("pos"))
     for note in pattern.iter("note"):
         midifile.addNote(
             track=track,
-            channel=track,
-            pitch=int(note.get("key")),
+            channel=channel,
+            pitch=int(note.get("key")) + 12,
             time=(time + int(note.get("pos"))) / 48.0,
             duration=int(note.get("len")) / 48.0,
             volume=int(note.get("vol"))

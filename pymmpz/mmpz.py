@@ -49,13 +49,14 @@ def add_notes_from_pattern(midifile, pattern, track=0, time=0):
 
 def add_tempo_events_from_track(midifile, track):
     for pattern in track.iterfind("automationpattern"):
-        time = int(pattern.get("pos"))
-        for event in pattern.iterfind("time"):
-            midifile.addTempo(
-                track=0,
-                time=(time + int(event.get("pos"))) / 48.0,
-                tempo=int(event.get("value"))
-            )
+        if pattern.get("name") == "Tempo":
+            time = int(pattern.get("pos"))
+            for event in pattern.iterfind("time"):
+                midifile.addTempo(
+                    track=0,
+                    time=(time + int(event.get("pos"))) / 48.0,
+                    tempo=int(event.get("value"))
+                )
 
 
 def convert_mmpz_to_midi(infile, outfile):

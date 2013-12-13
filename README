@@ -1,0 +1,7 @@
+PyMMPZ is a Python library and scripts for converting .mmpz files to midi.
+It's a pretty minimal set of functions as-is, and could possibly benefit from a
+redesign, with a more object-oriented API, so it can be used for more than just
+.mmpz to midi conversion.
+
+PyMMPZ is partially based on the MIDIUtil project by Mark Conway Wirt:
+http://code.google.com/p/midiutil/
